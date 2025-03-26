@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECOUNT Modern UI - Purchase Module</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="logo">ECOUNT</h1>
+                <span class="logo-subtitle">Modern UI</span>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active"><a href="#"><i class="fas fa-shopping-cart"></i> Purchase</a></li>
+                    <li><a href="#"><i class="fas fa-tags"></i> Sales</a></li>
+                    <li><a href="#"><i class="fas fa-boxes"></i> Inventory</a></li>
+                    <li><a href="#"><i class="fas fa-industry"></i> Manufacturing</a></li>
+                    <li><a href="#"><i class="fas fa-chart-line"></i> Reports</a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="#" class="help-link"><i class="fas fa-question-circle"></i> Help</a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="breadcrumb">
+                    <span>Dashboard</span> / <span class="current">Purchase</span>
+                </div>
+                <div class="header-actions">
+                    <div class="search-container">
+                        <input type="text" placeholder="Search...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name">John Doe</span>
+                        <img src="https://via.placeholder.com/40" alt="User Avatar" class="user-avatar">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Tabs Section -->
+            <div class="tabs-container">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="purchase-orders">Purchase Orders</button>
+                    <button class="tab-btn" data-tab="vendors">Vendors</button>
+                    <button class="tab-btn" data-tab="history">Purchase History</button>
+                </div>
+
+                <!-- Purchase Orders Tab -->
+                <div class="tab-content active" id="purchase-orders">
+                    <!-- Dashboard Section -->
+                    <section class="dashboard-section">
+                        <h2 class="section-title">Purchase Dashboard</h2>
+                        <div class="kpi-cards">
+                            <div class="kpi-card">
+                                <div class="kpi-icon"><i class="fas fa-file-invoice"></i></div>
+                                <div class="kpi-content">
+                                    <h3>Open POs</h3>
+                                    <p class="kpi-value">24</p>
+                                    <p class="kpi-trend positive"><i class="fas fa-arrow-up"></i> 12%</p>
+                                </div>
+                            </div>
+                            <div class="kpi-card">
+                                <div class="kpi-icon"><i class="fas fa-dollar-sign"></i></div>
+                                <div class="kpi-content">
+                                    <h3>Total Spend</h3>
+                                    <p class="kpi-value">$45,678</p>
+                                    <p class="kpi-trend negative"><i class="fas fa-arrow-down"></i> 5%</p>
+                                </div>
+                            </div>
+                            <div class="kpi-card">
+                                <div class="kpi-icon"><i class="fas fa-users"></i></div>
+                                <div class="kpi-content">
+                                    <h3>Active Vendors</h3>
+                                    <p class="kpi-value">37</p>
+                                    <p class="kpi-trend positive"><i class="fas fa-arrow-up"></i> 8%</p>
+                                </div>
+                            </div>
+                            <div class="kpi-card">
+                                <div class="kpi-icon"><i class="fas fa-truck"></i></div>
+                                <div class="kpi-content">
+                                    <h3>Pending Deliveries</h3>
+                                    <p class="kpi-value">12</p>
+                                    <p class="kpi-trend neutral"><i class="fas fa-minus"></i> 0%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="tab-header">
+                        <h2>Create Purchase Order</h2>
+                        <button class="btn-primary"><i class="fas fa-plus"></i> New PO</button>
+                    </div>
+                    
+                    <form class="purchase-order-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="vendor">Vendor</label>
+                                <select id="vendor" required>
+                                    <option value="">Select Vendor</option>
+                                    <option value="1">ABC Supplies</option>
+                                    <option value="2">XYZ Manufacturing</option>
+                                    <option value="3">Global Parts Inc.</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="po-date">PO Date</label>
+                                <input type="date" id="po-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="delivery-date">Expected Delivery</label>
+                                <input type="date" id="delivery-date" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="payment-terms">Payment Terms</label>
+                                <select id="payment-terms">
+                                    <option value="net30">Net 30</option>
+                                    <option value="net60">Net 60</option>
+                                    <option value="cod">COD</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="shipping-method">Shipping Method</label>
+                                <select id="shipping-method">
+                                    <option value="ground">Ground</option>
+                                    <option value="express">Express</option>
+                                    <option value="pickup">Pickup</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="currency">Currency</label>
+                                <select id="currency">
+                                    <option value="usd">USD</option>
+                                    <option value="eur">EUR</option>
+                                    <option value="gbp">GBP</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <h3>Line Items</h3>
+                        <div class="line-items-container">
+                            <table class="line-items-table">
+                                <thead>
+                                    <tr>
+                                        <th>Item</th>
+                                        <th>Description</th>
+                                        <th>Quantity</th>
+                                        <th>Unit Price</th>
+                                        <th>Total</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <select>
+                                                <option value="">Select Item</option>
+                                                <option value="item1">Item 1</option>
+                                                <option value="item2">Item 2</option>
+                                            </select>
+                                        </td>
+                                        <td><input type="text" placeholder="Description"></td>
+                                        <td><input type="number" value="1" min="1"></td>
+                                        <td><input type="number" value="0.00" step="0.01"></td>
+                                        <td>$0.00</td>
+                                        <td><button type="button" class="btn-icon"><i class="fas fa-trash"></i></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button type="button" class="btn-secondary add-line-item"><i class="fas fa-plus"></i> Add Item</button>
+                        </div>
+                        
+                        <div class="form-row totals-section">
+                            <div class="spacer"></div>
+                            <div class="totals">
+                                <div class="total-row">
+                                    <span>Subtotal:</span>
+                                    <span>$0.00</span>
+                                </div>
+                                <div class="total-row">
+                                    <span>Tax (10%):</span>
+                                    <span>$0.00</span>
+                                </div>
+                                <div class="total-row">
+                                    <span>Shipping:</span>
+                                    <span>$0.00</span>
+                                </div>
+                                <div class="total-row grand-total">
+                                    <span>Total:</span>
+                                    <span>$0.00</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary">Save Draft</button>
+                            <button type="submit" class="btn-primary">Create PO</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Vendors Tab -->
+                <div class="tab-content" id="vendors">
+                    <div class="tab-header">
+                        <h2>Vendor Management</h2>
+                        <button class="btn-primary"><i class="fas fa-plus"></i> Add Vendor</button>
+                    </div>
+                    
+                    <div class="table-actions">
+                        <div class="search-filter">
+                            <input type="text" placeholder="Search vendors...">
+                            <select>
+                                <option value="all">All Vendors</option>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Vendor Name</th>
+                                <th>Contact</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>ABC Supplies</td>
+                                <td>John Smith</td>
+                                <td>john@abcsupplies.com</td>
+                                <td>555-123-4567</td>
+                                <td><span class="status-badge active">Active</span></td>
+                                <td>
+                                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>XYZ Manufacturing</td>
+                                <td>Jane Doe</td>
+                                <td>jane@xyzmanufacturing.com</td>
+                                <td>555-987-6543</td>
+                                <td><span class="status-badge active">Active</span></td>
+                                <td>
+                                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Global Parts Inc.</td>
+                                <td>Bob Johnson</td>
+                                <td>bob@globalparts.com</td>
+                                <td>555-456-7890</td>
+                                <td><span class="status-badge inactive">Inactive</span></td>
+                                <td>
+                                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="pagination">
+                        <button class="pagination-btn"><i class="fas fa-chevron-left"></i></button>
+                        <button class="pagination-btn active">1</button>
+                        <button class="pagination-btn">2</button>
+                        <button class="pagination-btn">3</button>
+                        <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Purchase History Tab -->
+                <div class="tab-content" id="history">
+                    <div class="tab-header">
+                        <h2>Purchase History</h2>
+                        <div class="date-range">
+                            <label>Date Range:</label>
+                            <input type="date">
+                            <span>to</span>
+                            <input type="date">
+                            <button class="btn-secondary">Apply</button>
+                        </div>
+                    </div>
+                    
+                    <div class="table-actions">
+                        <div class="search-filter">
+                            <input type="text" placeholder="Search purchase orders...">
+                            <select>
+                                <option value="all">All Status</option>
+                                <option value="open">Open</option>
+                                <option value="closed">Closed</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                        </div>
+                        <button class="btn-secondary"><i class="fas fa-download"></i> Export</button>
+                    </div>
+                    
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>PO Number</th>
+                                <th>Vendor</th>
+                                <th>Date</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>PO-2023-001</td>
+                                <td>ABC Supplies</td>
+                                <td>2023-06-15</td>
+                                <td>$1,250.00</td>
+                                <td><span class="status-badge open">Open</span></td>
+                                <td>
+                                    <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon"><i class="fas fa-print"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>PO-2023-002</td>
+                                <td>XYZ Manufacturing</td>
+                                <td>2023-06-10</td>
+                                <td>$3,750.00</td>
+                                <td><span class="status-badge closed">Closed</span></td>
+                                <td>
+                                    <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-icon"><i class="fas fa-print"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>PO-2023-003</td>
+                                <td>Global Parts Inc.</td>
+                                <td>2023-06-05</td>
+                                <td>$950.00</td>
+                                <td><span class="status-badge cancelled">Cancelled</span></td>
+                                <td>
+                                    <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-icon"><i class="fas fa-print"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="pagination">
+                        <button class="pagination-btn"><i class="fas fa-chevron-left"></i></button>
+                        <button class="pagination-btn active">1</button>
+                        <button class="pagination-btn">2</button>
+                        <button class="pagination-btn">3</button>
+                        <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for adding/editing vendors -->
+    <div class="modal" id="vendor-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Vendor</h2>
+                <button class="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form class="vendor-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="vendor-name">Vendor Name</label>
+                            <input type="text" id="vendor-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-name">Contact Name</label>
+                            <input type="text" id="contact-name">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="vendor-email">Email</label>
+                            <input type="email" id="vendor-email">
+                        </div>
+                        <div class="form-group">
+                            <label for="vendor-phone">Phone</label>
+                            <input type="tel" id="vendor-phone">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="vendor-address">Address</label>
+                            <textarea id="vendor-address" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="vendor-status">Status</label>
+                            <select id="vendor-status">
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="vendor-category">Category</label>
+                            <select id="vendor-category">
+                                <option value="supplier">Supplier</option>
+                                <option value="manufacturer">Manufacturer</option>
+                                <option value="distributor">Distributor</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="cancel-vendor">Cancel</button>
+                <button class="btn-primary" id="save-vendor">Save Vendor</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="api-mock.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
