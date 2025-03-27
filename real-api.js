@@ -8,11 +8,11 @@
  * 2. In your HTML file, replace api-mock.js with real-api.js
  */
 
-// API key for authentication - Replace with your actual ECOUNT API key
-const API_KEY = 'YOUR_ECOUNT_API_KEY_HERE';
+// API key for authentication - Your ECOUNT API key
+const API_KEY = '	11273bda45d6b43b7ab6df0a87132d91d6';
 
-// Base URL for the ECOUNT API
-const API_BASE_URL = 'https://api.ecount.com';  // Replace with your actual ECOUNT API endpoint
+// Base URL for the ECOUNT API - This should match your ECOUNT instance URL
+const API_BASE_URL = 'https://loginins.ecount.com';  // Adjust based on your ECOUNT URL
 
 /**
  * Real API Class for ECOUNT Integration
