@@ -6,8 +6,43 @@
     <title>ECOUNT Modern UI - Purchase Module</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .api-toggle {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .api-toggle select {
+            padding: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        .api-toggle button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
+    <!-- API Toggle Control -->
+    <div class="api-toggle">
+        <select id="api-select">
+            <option value="mock" selected>Mock API</option>
+            <option value="ecount">ECOUNT API</option>
+        </select>
+        <button id="api-toggle-btn">Switch API</button>
+    </div>
     <div class="app-container">
         <!-- Sidebar Navigation -->
         <aside class="sidebar">
@@ -435,7 +470,37 @@
         </div>
     </div>
 
-    <script src="api-mock.js"></script>
+    <!-- Load API scripts dynamically based on selection -->
+    <script id="api-script" src="api-mock.js"></script>
     <script src="script.js"></script>
+    
+    <!-- API Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const apiSelect = document.getElementById('api-select');
+            const apiToggleBtn = document.getElementById('api-toggle-btn');
+            const apiScript = document.getElementById('api-script');
+            
+            // Handle API toggle button click
+            apiToggleBtn.addEventListener('click', function() {
+                const selectedApi = apiSelect.value;
+                
+                if (selectedApi === 'mock') {
+                    // Switch to mock API
+                    apiScript.src = 'api-mock.js';
+                    console.log('Switched to Mock API');
+                } else if (selectedApi === 'ecount') {
+                    // Switch to ECOUNT API
+                    apiScript.src = 'real-api.js';
+                    console.log('Switched to ECOUNT API');
+                }
+                
+                // Reload the page to reinitialize with the new API
+                setTimeout(() => {
+                    location.reload();
+                }, 500);
+            });
+        });
+    </script>
 </body>
 </html>

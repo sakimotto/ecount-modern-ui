@@ -8,11 +8,11 @@
  * 2. In your HTML file, replace api-mock.js with real-api.js
  */
 
-// API key for authentication
-const API_KEY = 'ecount_api_key_12345';
+// API key for authentication - Replace with your actual ECOUNT API key
+const API_KEY = 'YOUR_ECOUNT_API_KEY_HERE';
 
-// Base URL for the API
-const API_BASE_URL = 'http://localhost:3000';
+// Base URL for the ECOUNT API
+const API_BASE_URL = 'https://api.ecount.com';  // Replace with your actual ECOUNT API endpoint
 
 /**
  * Real API Class for ECOUNT Integration
@@ -35,59 +35,106 @@ class RealEcountAPI {
     }
     
     /**
-     * Authenticate with the API
+     * Authenticate with the ECOUNT API
+     *
+     * ECOUNT API uses a different authentication method than our mock API.
+     * This method authenticates using the API key issued from the ECOUNT system.
      */
     async authenticate() {
-        console.log('Authenticating with real API...');
+        console.log('Authenticating with ECOUNT API...');
         
         try {
-            const response = await fetch(`${this.baseUrl}/api/auth`, {
-                method: 'POST',
+            // ECOUNT API typically uses API key in the header for authentication
+            // This is a placeholder - adjust based on actual ECOUNT API documentation
+            const response = await fetch(`${this.baseUrl}/ECERP/ECP/ECP050M`, {
+                method: 'GET',
                 headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ apiKey: this.apiKey })
+                    'Authorization': `Bearer ${this.apiKey}`,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
             });
             
-            const data = await response.json();
-            
-            if (data.success) {
+            // Check if the response is successful
+            if (response.ok) {
+                const data = await response.json();
                 this.isAuthenticated = true;
-                this.authToken = data.token;
-                console.log('Authentication successful');
+                this.authToken = this.apiKey; // ECOUNT might use the API key directly
+                console.log('Authentication with ECOUNT successful');
                 return data;
             } else {
-                console.error('Authentication failed:', data.message);
-                throw new Error(data.message || 'Authentication failed');
+                const errorData = await response.json();
+                console.error('ECOUNT authentication failed:', errorData);
+                throw new Error(errorData.message || `Authentication failed with status ${response.status}`);
             }
         } catch (error) {
-            console.error('API Error:', error);
+            console.error('ECOUNT API Error:', error);
             throw error;
         }
     }
     
     /**
-     * Get dashboard statistics
+     * Get dashboard statistics from ECOUNT
+     *
+     * This method retrieves purchase-related statistics from the ECOUNT API
+     * and transforms them into the format our front-end expects.
      */
     async getDashboardStats() {
         this.checkAuth();
         
         try {
-            const response = await fetch(`${this.baseUrl}/api/dashboard/stats`, {
+            // Make requests to ECOUNT API endpoints to gather dashboard data
+            // These endpoints should be adjusted based on actual ECOUNT API documentation
+            
+            // Get open purchase orders count
+            const openPOsResponse = await fetch(`${this.baseUrl}/ECERP/ECP/ECP051M`, {
+                method: 'GET',
                 headers: {
-                    'Authorization': `Bearer ${this.authToken}`
+                    'Authorization': `Bearer ${this.authToken}`,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                // Add query parameters to filter for open POs
+                // This is a placeholder - adjust based on actual ECOUNT API
+                params: {
+                    Status: 'Open'
                 }
             });
             
-            const data = await response.json();
+            // Get total spend data
+            const spendResponse = await fetch(`${this.baseUrl}/ECERP/ECP/ECP052M`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${this.authToken}`,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            });
             
-            if (data.success) {
-                return data.data;
+            // Process responses
+            if (openPOsResponse.ok && spendResponse.ok) {
+                const openPOsData = await openPOsResponse.json();
+                const spendData = await spendResponse.json();
+                
+                // Transform ECOUNT data into our dashboard format
+                // This is a placeholder - adjust based on actual ECOUNT API response structure
+                return {
+                    openPOs: openPOsData.length || 0,
+                    totalSpend: spendData.totalAmount || 0,
+                    activeVendors: 37, // This would come from another ECOUNT API call
+                    pendingDeliveries: 12, // This would come from another ECOUNT API call
+                    trends: {
+                        openPOs: 12,
+                        totalSpend: -5,
+                        activeVendors: 8,
+                        pendingDeliveries: 0
+                    }
+                };
             } else {
-                throw new Error(data.message || 'Failed to fetch dashboard stats');
+                throw new Error('Failed to fetch dashboard stats from ECOUNT');
             }
         } catch (error) {
-            console.error('API Error:', error);
+            console.error('ECOUNT API Error:', error);
             throw error;
         }
     }
